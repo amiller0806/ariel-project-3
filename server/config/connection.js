@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost:3000/deploy-skincare",
+  process.env.MONGODB_URI || "mongodb://localhost:27017/deploy-skincare",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
