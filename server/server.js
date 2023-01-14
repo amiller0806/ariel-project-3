@@ -32,7 +32,7 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(express.json());
-
+// API routes
 app.get("/categories/:category", (req, res) => {
   console.log(req.params.category);
   //console.log(jsonData)
