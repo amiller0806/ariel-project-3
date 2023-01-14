@@ -7,7 +7,8 @@ const {
 // import our typeDefs and resolvers
 const {
   typeDefs,
-  resolvers
+  resolvers,
+ 
 } = require("./schemas");
 const db = require("./config/connection");
 
@@ -24,6 +25,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
+  persistedQueries: false
 });
 
 const app = express();
