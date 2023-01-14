@@ -12,7 +12,7 @@ const {
 } = require("./schemas");
 const db = require("./config/connection");
 
-const jsonData = require("./seeds/seeds.json");
+//const jsonData = require("./seeds/seeds.json");
 
 //import middleware
 const {
