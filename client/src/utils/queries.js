@@ -1,6 +1,8 @@
-import { gql } from "@apollo/client";
+import {
+  gql
+} from "@apollo/client";
 
-export const PRODUCT_BY_CATEGORY = gql`
+export const PRODUCT_BY_CATEGORY = gql `
   query productByCategory($category: String!) {
     productByCategory(category: $category) {
       _id
@@ -13,6 +15,18 @@ export const PRODUCT_BY_CATEGORY = gql`
       brand
       link
       category
+    }
+  }
+`;
+
+export const QUERY_ME = gql `
+  query me {
+    me {
+      _id
+      username
+      favoriteProducts {
+        _id
+      }
     }
   }
 `;

@@ -1,15 +1,22 @@
 const express = require("express");
 // import ApolloServer
-const { ApolloServer } = require("apollo-server-express");
+const {
+  ApolloServer
+} = require("apollo-server-express");
 
 // import our typeDefs and resolvers
-const { typeDefs, resolvers } = require("./schemas");
+const {
+  typeDefs,
+  resolvers
+} = require("./schemas");
 const db = require("./config/connection");
 
-const jsonData = require('./seeds/seeds.json')
+const jsonData = require("./seeds/seeds.json");
 
 //import middleware
-const { authMiddleware } = require("./utils/auth");
+const {
+  authMiddleware
+} = require("./utils/auth");
 
 const PORT = process.env.PORT || 3001;
 // create a new Apollo server and pass in our schema data
@@ -21,24 +28,40 @@ const server = new ApolloServer({
 
 const app = express();
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(express.json());
 
-app.get('/categories/:category', (req, res) => {
-    console.log(req.params.category)
-    //console.log(jsonData)
-    const filteredData = jsonData.filter((product) => {
-        //console.log(product)
-        return product.category === req.params.category
-    })
-    return res.json({filteredData})
-})
+app.get("/categories/:category", (req, res) => {
+  console.log(req.params.category);
+  //console.log(jsonData)
+  const filteredData = jsonData.filter((product) => {
+    //console.log(product)
+    return product.category === req.params.category;
+  });
+  return res.json({
+    filteredData
+  });
+});
+
+app.get("/me/:favoriteProducts", (req, res) => {
+  console.log(req.params._id);
+  const filteredProducts = jsonData.filter((product) => {
+    return product._id === req.params._id;
+  });
+  return res.json({
+    filteredProducts
+  });
+});
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   // integrate our Apollo server with the Express application as middleware
-  server.applyMiddleware({ app });
+  server.applyMiddleware({
+    app
+  });
 
   db.once("open", () => {
     app.listen(PORT, () => {
