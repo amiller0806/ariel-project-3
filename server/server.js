@@ -4,6 +4,7 @@ const {
   ApolloServer
 } = require("apollo-server-express");
 
+
 // import our typeDefs and resolvers
 const {
   typeDefs,
@@ -12,7 +13,7 @@ const {
 } = require("./schemas");
 const db = require("./config/connection");
 
-//const jsonData = require("./seeds/seeds.json");
+const jsonData = require("./seeds/seeds.json");
 
 //import middleware
 const {
@@ -25,7 +26,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
-  persistedQueries: false
+  persistedQueries: false,
+
 });
 
 const app = express();
