@@ -7,11 +7,12 @@ const {
 // import our typeDefs and resolvers
 const {
   typeDefs,
-  resolvers
+  resolvers,
+ 
 } = require("./schemas");
 const db = require("./config/connection");
 
-const jsonData = require("./seeds/seeds.json");
+//const jsonData = require("./seeds/seeds.json");
 
 //import middleware
 const {
@@ -24,6 +25,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
+  persistedQueries: false
 });
 
 const app = express();
@@ -32,7 +34,7 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(express.json());
-
+// API routes
 app.get("/categories/:category", (req, res) => {
   console.log(req.params.category);
   //console.log(jsonData)
@@ -76,3 +78,6 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);
+
+
+// Updated Package.json, and 
